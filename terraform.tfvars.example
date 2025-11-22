@@ -1,0 +1,47 @@
+# ============================================
+# Oracle Cloud Infrastructure - Configuração
+# ============================================
+# 
+# Este é um arquivo de exemplo. NÃO commite este arquivo com valores reais!
+# 
+# Para usar:
+# 1. Copie este arquivo: cp terraform.tfvars.example terraform.tfvars
+# 2. Preencha com seus valores reais
+# 3. O arquivo terraform.tfvars está no .gitignore e não será commitado
+#
+# ============================================
+
+# OCID do Tenancy (encontrado no Configuration File Preview)
+tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaa..."
+
+# OCID do User (encontrado no Configuration File Preview)
+user_ocid = "ocid1.user.oc1..aaaaaaaa..."
+
+# Fingerprint da API Key (encontrado no Configuration File Preview)
+fingerprint = "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99"
+
+# Caminho para a chave privada da API
+private_key_path = "~/.oci/oci_api_key.pem"
+
+# Região da Oracle Cloud
+region = "us-ashburn-1"
+
+# OCID do Compartment (Identity & Security → Compartments)
+compartment_ocid = "ocid1.compartment.oc1..aaaaaaaa..."
+
+# Chave SSH pública para acesso às VMs
+# Conteúdo do arquivo ~/.ssh/oracle_vm_key.pub
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQ..."
+
+# ============================================
+# Configuração da Instância ARM
+# ============================================
+
+# Número de OCPUs (Always Free: até 4)
+ocpu_count = 4
+
+# Memória em GB (Always Free: até 24GB)
+memory_gb = 24
+
+# Tamanho do disco de boot em GB (Always Free: até 200GB)
+boot_volume_gb = 200
