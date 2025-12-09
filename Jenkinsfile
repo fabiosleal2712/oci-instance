@@ -28,7 +28,7 @@ pipeline {
 		)
 		string(
 			name: 'REMOTE_SSH_CREDENTIAL_ID',
-			defaultValue: 'fabioleal-ssh',
+			defaultValue: 'd80738a5-be15-4350-9fa3-5cbfd81b78c2',
 			description: 'Credencial "SSH Username with private key" configurada no Jenkins'
 		)
 	}
