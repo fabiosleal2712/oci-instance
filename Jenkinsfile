@@ -8,7 +8,7 @@ pipeline {
 	parameters {
 		string(
 			name: 'REMOTE_HOST',
-			defaultValue: 'fabioleal@10.30.0.50',
+			defaultValue: 'fabioleal@62.169.17.216',
 			description: 'Host SSH que contém a pasta do projeto'
 		)
 		string(
