@@ -47,6 +47,9 @@ pipeline {
 						git fetch --all --prune
 						git checkout \"${params.GIT_BRANCH}\"
 						git pull --rebase origin \"${params.GIT_BRANCH}\"
+						echo "🔍 Verificando comando: ${params.REMOTE_APPLY_COMMAND}"
+						which terraform || echo "terraform não encontrado"
+						which tofu || echo "tofu não encontrado"
 						${params.REMOTE_APPLY_COMMAND}
 						REMOTE_EOF
 					"""
