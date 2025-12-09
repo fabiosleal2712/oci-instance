@@ -23,7 +23,7 @@ pipeline {
 		)
 		string(
 			name: 'REMOTE_APPLY_COMMAND',
-			defaultValue: 'terradorm apply --aprove',
+			defaultValue: 'terraform apply -auto-approve',
 			description: 'Comando remoto executado após o git pull'
 		)
 		string(
