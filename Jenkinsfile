@@ -37,6 +37,31 @@ pipeline {
             defaultValue: '2',
             description: 'Tentar em quantos ADs (0=apenas AD-1, 1=AD-1 e AD-2, 2=todos os 3 ADs)'
         )
+        booleanParam(
+            name: 'RUN_REMOTE_APPLY',
+            defaultValue: true,
+            description: 'Executa o terradorm remoto via SSH após o apply local'
+        )
+        string(
+            name: 'REMOTE_HOST',
+            defaultValue: 'fabioleal@10.30.0.50',
+            description: 'Host remoto onde o terradorm será executado'
+        )
+        string(
+            name: 'REMOTE_WORKDIR',
+            defaultValue: '/home/fabioleal/.oci-instancias/oci-instance',
+            description: 'Diretório remoto que contém os arquivos do terradorm'
+        )
+        string(
+            name: 'REMOTE_COMMAND',
+            defaultValue: 'terradorm apply --aprove',
+            description: 'Comando remoto a ser executado dentro do diretório indicado'
+        )
+        string(
+            name: 'REMOTE_SSH_CREDENTIAL_ID',
+            defaultValue: 'fabioleal-ssh',
+            description: 'ID da credencial SSH (SSH Username with private key) configurada no Jenkins'
+        )
     }
     
     environment {
@@ -204,6 +229,25 @@ pipeline {
                             error("Não foi possível criar a instância após ${attempt} tentativas")
                         }
                     }
+                }
+            }
+        }
+
+        stage('Remote Apply') {
+            when {
+                expression { params.RUN_REMOTE_APPLY }
+            }
+            steps {
+                script {
+                    echo "🌐 Executando terradorm remoto em ${params.REMOTE_HOST}"
+                }
+                sshagent(credentials: [params.REMOTE_SSH_CREDENTIAL_ID]) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ${params.REMOTE_HOST} <<'EOF'
+                        cd ${params.REMOTE_WORKDIR}
+                        ${params.REMOTE_COMMAND}
+                        EOF
+                    """
                 }
             }
         }
